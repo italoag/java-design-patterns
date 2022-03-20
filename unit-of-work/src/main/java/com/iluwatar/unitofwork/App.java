@@ -1,7 +1,6 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2014-2017 Piyush Chaudhari
+ * The MIT License
+ * Copyright © 2014-2021 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -10,16 +9,16 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  */
 
 package com.iluwatar.unitofwork;
@@ -28,25 +27,29 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * {@link App} Application for managing student data.
+ * {@link App} Application demonstrating unit of work pattern.
  */
 public class App {
   /**
+   * Program entry point.
    *
    * @param args no argument sent
    */
+
   public static void main(String[] args) {
-    Student ram = new Student(1, "Ram", "Street 9, Cupertino");
-    Student shyam = new Student(2, "Shyam", "Z bridge, Pune");
-    Student gopi = new Student(3, "Gopi", "Street 10, Mumbai");
+    // create some weapons
+    var enchantedHammer = new Weapon(1, "enchanted hammer");
+    var brokenGreatSword = new Weapon(2, "broken great sword");
+    var silverTrident = new Weapon(3, "silver trident");
 
-    HashMap<String, List<Student>> context = new HashMap<>();
-    StudentDatabase studentDatabase = new StudentDatabase();
-    StudentRepository studentRepository = new StudentRepository(context, studentDatabase);
+    // create repository
+    var weaponRepository = new ArmsDealer(new HashMap<String, List<Weapon>>(),
+            new WeaponDatabase());
 
-    studentRepository.registerNew(ram);
-    studentRepository.registerModified(shyam);
-    studentRepository.registerDeleted(gopi);
-    studentRepository.commit();
+    // perform operations on the weapons
+    weaponRepository.registerNew(enchantedHammer);
+    weaponRepository.registerModified(silverTrident);
+    weaponRepository.registerDeleted(brokenGreatSword);
+    weaponRepository.commit();
   }
 }

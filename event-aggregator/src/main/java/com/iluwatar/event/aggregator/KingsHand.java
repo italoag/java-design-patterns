@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014-2016 Ilkka Seppälä
+ * Copyright © 2014-2021 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +20,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package com.iluwatar.event.aggregator;
 
 /**
- * 
  * KingsHand observes events from multiple sources and delivers them to listeners.
- *
  */
 public class KingsHand extends EventEmitter implements EventObserver {
 
   public KingsHand() {
   }
 
-  public KingsHand(EventObserver obs) {
-    super(obs);
+  public KingsHand(EventObserver obs, Event e) {
+    super(obs, e);
   }
 
   @Override
@@ -43,6 +42,5 @@ public class KingsHand extends EventEmitter implements EventObserver {
 
   @Override
   public void timePasses(Weekday day) {
-    // NOP
   }
 }
